@@ -131,7 +131,7 @@
 
   <div style="margin-top: 2rem; text-align: center; color: rgba(249, 228, 160, 0.6); font-size: 0.9rem;">
     <p>Debug info: Check browser console (F12) for errors</p>
-    <button type="button" onclick="testConnection()" style="background: rgba(212, 168, 67, 0.3); border: 1px solid rgba(212, 168, 67, 0.5); color: #f9e4a0; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; margin-top: 0.5rem;">Test Firebase Connection</button>
+    <button type="button" onclick="testConnection()" style="background: rgba(212, 168, 67, 0.3); border: 1px solid rgba(212, 168, 67, 0.5); color: #f9e4a0; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; margin-top: 0.5rem;">Test Supabase Connection</button>
   </div>
 
 <!-- Supabase SDK -->
@@ -143,12 +143,13 @@
   const SUPABASE_ANON_KEY = 'sb_publishable_U1a3ESaIHh0iyc-lvux-EA_u0mQs3Qo';
 
   // Initialize Supabase
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const { createClient } = window.supabase;
+  const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // Function to save message
   async function saveMessage(senderName, content, isAnonymous) {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from('messages')
         .insert([
           {
@@ -175,7 +176,7 @@
   window.testConnection = async function() {
     try {
       console.log('Testing Supabase connection...');
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from('messages')
         .insert([
           {
@@ -188,14 +189,14 @@
 
       if (error) {
         console.error('Supabase connection failed:', error);
-        alert('Supabase error: ' + error.message + '\n\nCheck:\n1. Supabase URL and key\n2. Database table exists\n3. RLS policies are set');
+        alert('❌ Supabase Error: ' + error.message + '\n\n🔧 Check:\n1. Supabase URL and anon key\n2. Database table exists\n3. RLS policies are set');
       } else {
-        console.log('Supabase connection successful!');
-        alert('Supabase connection works! Messages should send now.');
+        console.log('✅ Supabase connection successful!');
+        alert('🎉 Supabase connection works! Messages should send now.');
       }
     } catch (error) {
       console.error('Connection test failed:', error);
-      alert('Connection error: ' + error.message);
+      alert('❌ Connection Error: ' + error.message + '\n\nTry refreshing the page and testing again.');
     }
   }
 
