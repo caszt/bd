@@ -134,35 +134,36 @@
     <button type="button" onclick="testConnection()" style="background: rgba(212, 168, 67, 0.3); border: 1px solid rgba(212, 168, 67, 0.5); color: #f9e4a0; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; margin-top: 0.5rem;">Test Firebase Connection</button>
   </div>
 
-<!-- Firebase SDK -->
-<script type="module">
-  // Firebase imports
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-  import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // REPLACE THESE WITH YOUR SUPABASE PROJECT DETAILS
+  // Find them at: Supabase Dashboard → Settings → API
+  const SUPABASE_URL = 'https://dulhnhngbkkjoblxvkim.supabase.co/rest/v1/';
+  const SUPABASE_ANON_KEY = 'sb_publishable_U1a3ESaIHh0iyc-lvux-EA_u0mQs3Qo';
 
-  // Firebase config - REPLACE WITH YOUR ACTUAL CONFIG
-  const firebaseConfig = {
-    apiKey: "AIzaSyAINMc8-eSmHDr3h7XoE2T5oXm8lqIK8qI",
-    authDomain: "birthday-surprise-ca09a.firebaseapp.com",
-    projectId: "birthday-surprise-ca09a",
-    storageBucket: "birthday-surprise-ca09a.firebasestorage.app",
-    messagingSenderId: "631812025900",
-    appId: "1:631812025900:web:3d948f5023b46e3cf7ab89"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  // Initialize Supabase
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // Function to save message
   async function saveMessage(senderName, content, isAnonymous) {
     try {
-      await addDoc(collection(db, 'messages'), {
-        sender: isAnonymous ? 'Anonymous Friend' : senderName || 'Anonymous Friend',
-        content: content,
-        timestamp: new Date(),
-        read: false
-      });
+      const { data, error } = await supabase
+        .from('messages')
+        .insert([
+          {
+            sender: isAnonymous ? 'Anonymous Friend' : senderName || 'Anonymous Friend',
+            content: content,
+            timestamp: new Date().toISOString(),
+            read: false
+          }
+        ]);
+
+      if (error) {
+        console.error('Error saving message:', error);
+        return { success: false, error: error.message };
+      }
+
       return { success: true };
     } catch (error) {
       console.error('Error saving message:', error);
@@ -170,19 +171,31 @@
     }
   }
 
-  // Test Firebase connection
+  // Test Supabase connection
   window.testConnection = async function() {
     try {
-      console.log('Testing Firebase connection...');
-      const testDoc = await addDoc(collection(db, 'test'), {
-        message: 'Connection test',
-        timestamp: new Date()
-      });
-      console.log('Firebase connection successful! Test doc ID:', testDoc.id);
-      alert('Firebase connection works! Messages should send now.');
+      console.log('Testing Supabase connection...');
+      const { data, error } = await supabase
+        .from('messages')
+        .insert([
+          {
+            sender: 'Connection Test',
+            content: 'Testing Supabase connection',
+            timestamp: new Date().toISOString(),
+            read: true
+          }
+        ]);
+
+      if (error) {
+        console.error('Supabase connection failed:', error);
+        alert('Supabase error: ' + error.message + '\n\nCheck:\n1. Supabase URL and key\n2. Database table exists\n3. RLS policies are set');
+      } else {
+        console.log('Supabase connection successful!');
+        alert('Supabase connection works! Messages should send now.');
+      }
     } catch (error) {
-      console.error('Firebase connection failed:', error);
-      alert('Firebase error: ' + error.message + '\n\nCheck:\n1. Firebase config\n2. Firestore rules\n3. Internet connection');
+      console.error('Connection test failed:', error);
+      alert('Connection error: ' + error.message);
     }
   }
 
