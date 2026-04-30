@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   BIRTHDAY EXPERIENCE STYLES
+   BIRTHDAY EXPERIENCE — RED LUXURY STYLES
    ═══════════════════════════════════════════════ */
 
 *, *::before, *::after {
@@ -9,28 +9,27 @@
 }
 
 :root {
-  --warm1: #fff8f0;
-  --warm2: #fde8d0;
-  --warm3: #f9c89a;
-  --warm4: #e8956d;
-  --warm5: #c0623a;
-  --cream: #fdf6ee;
-  --text-warm: #5c3317;
-  --text-soft: #9b6b4a;
+  /* ── Red Luxury Palette ── */
+  --crimson1: #ff1a2e;
+  --crimson2: #cc0f22;
+  --crimson3: #990a18;
+  --scarlet1: #ff4d5e;
+  --scarlet2: #ff8090;
+  --blush:    #ffd6da;
+  --rose-pale:#fff0f1;
 
-  /* ── Luxury palette ── */
   --gold1: #f9e4a0;
   --gold2: #d4a843;
   --gold3: #a87832;
-  --rose1: #f7ccd8;
-  --rose2: #e8839e;
-  --rose3: #c04070;
-  --plum1: #3d1a34;
-  --plum2: #5c1e4a;
-  --plum3: #7b2560;
-  --deep1: #0f0814;
-  --deep2: #1a0d22;
-  --deep3: #26112e;
+
+  --deep1: #0f0205;
+  --deep2: #1a0308;
+  --deep3: #250510;
+  --deep4: #350818;
+  --deep5: #4a0a1e;
+
+  --text-light: #ffeef0;
+  --text-soft:  rgba(255,214,218,0.85);
 }
 
 html, body {
@@ -49,7 +48,7 @@ html, body {
   top: 1rem;
   left: 1rem;
   z-index: 9999;
-  background: rgba(45, 15, 40, 0.75);
+  background: rgba(60, 5, 15, 0.8);
   border: 1.5px solid rgba(212, 168, 67, 0.45);
   border-radius: 50%;
   width: 44px;
@@ -59,20 +58,18 @@ html, body {
   display: none;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 }
 
 #home-btn:hover {
   transform: scale(1.08);
-  border-color: rgba(212, 168, 67, 0.8);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 12px rgba(212,168,67,0.15);
+  border-color: rgba(212, 168, 67, 0.9);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 14px rgba(212,168,67,0.2);
 }
 
-#home-btn.visible {
-  display: flex;
-}
+#home-btn.visible { display: flex; }
 
 /* ═══════════════════════════════════════════════
    CHAT BUTTON & MESSAGES MODAL
@@ -81,44 +78,46 @@ html, body {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  z-index: 1000;
-  background: rgba(60, 20, 50, 0.8);
-  border: 1.5px solid rgba(212, 168, 67, 0.4);
+  z-index: 10000;
+  background: rgba(80, 5, 20, 0.85);
+  border: 1.5px solid rgba(212, 168, 67, 0.45);
   border-radius: 50%;
   width: 60px;
   height: 60px;
   font-size: 1.5rem;
   cursor: pointer;
-  display: flex;
+  display: none; /* Hidden by default */
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 18px rgba(180,10,30,0.3);
   transition: all 0.3s ease;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   color: var(--gold1);
+  pointer-events: auto;
 }
 
 #chat-btn:hover {
   transform: scale(1.1);
-  border-color: rgba(212, 168, 67, 0.8);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.6), 0 0 12px rgba(212,168,67,0.2);
+  border-color: rgba(212, 168, 67, 0.9);
+  box-shadow: 0 6px 28px rgba(180,10,30,0.45), 0 0 14px rgba(212,168,67,0.25);
 }
 
-#chat-btn.has-messages {
-  animation: pulse 2s infinite;
+#chat-btn.visible {
+  display: flex;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+#chat-btn.has-messages { animation: chatPulse 2s infinite; }
+
+@keyframes chatPulse {
+  0%,100% { transform: scale(1); box-shadow: 0 4px 18px rgba(180,10,30,0.3); }
+  50%      { transform: scale(1.06); box-shadow: 0 6px 28px rgba(200,20,40,0.5), 0 0 20px rgba(212,168,67,0.2); }
 }
 
 #message-badge {
   position: absolute;
   top: -8px;
   right: -8px;
-  background: var(--rose3);
+  background: var(--crimson1);
   color: white;
   border-radius: 50%;
   width: 24px;
@@ -128,8 +127,8 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--deep3);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 2px solid var(--deep2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
 /* Messages Modal */
@@ -137,14 +136,14 @@ html, body {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0,0,0,0.88);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease;
   padding: 2rem 1rem;
 }
 
@@ -154,17 +153,18 @@ html, body {
 }
 
 .messages-content {
-  background: linear-gradient(160deg, #1e0f22 0%, #2a1230 50%, #1a0e20 100%);
-  border-radius: 14px;
+  background: linear-gradient(160deg, #1a0308 0%, #280510 50%, #1a0308 100%);
+  border-radius: 16px;
   padding: 2rem;
   max-height: 70vh;
   overflow-y: auto;
   width: 100%;
   max-width: 500px;
   box-shadow:
-    0 24px 70px rgba(0,0,0,0.7),
-    0 0 0 1px rgba(212,168,67,0.3);
-  border: 1px solid rgba(212, 168, 67, 0.35);
+    0 28px 80px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(212,168,67,0.3),
+    inset 0 0 60px rgba(180,10,30,0.05);
+  border: 1px solid rgba(212,168,67,0.3);
   position: relative;
   z-index: 1;
 }
@@ -175,15 +175,15 @@ html, body {
   font-size: 2rem;
   margin-bottom: 1.5rem;
   text-align: center;
-  text-shadow: 0 0 20px rgba(212,168,67,0.4);
+  text-shadow: 0 0 24px rgba(212,168,67,0.5);
 }
 
 .modal-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(60, 20, 50, 0.7);
-  border: 1.5px solid rgba(212, 168, 67, 0.4);
+  background: rgba(80, 5, 20, 0.75);
+  border: 1.5px solid rgba(212,168,67,0.4);
   color: var(--gold1);
   border-radius: 50%;
   width: 40px;
@@ -193,13 +193,13 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: all 0.2s;
   z-index: 110;
 }
 
 .modal-close:hover {
-  background: rgba(100, 30, 80, 0.8);
-  border-color: rgba(212, 168, 67, 0.8);
+  background: rgba(140,10,30,0.85);
+  border-color: rgba(212,168,67,0.85);
   transform: scale(1.1);
 }
 
@@ -210,11 +210,40 @@ html, body {
 }
 
 .message-item {
-  background: rgba(60, 20, 50, 0.6);
-  border: 1px solid rgba(212, 168, 67, 0.3);
+  background: rgba(80, 5, 20, 0.5);
+  border: 1px solid rgba(212,168,67,0.25);
   border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  transition: border-color 0.2s;
+}
+
+.message-item:hover { border-color: rgba(212,168,67,0.45); }
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.delete-btn {
+  background: rgba(180,20,40,0.7);
+  border: 1px solid rgba(220,53,69,0.4);
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  opacity: 0.7;
+}
+
+.delete-btn:hover {
+  background: rgba(220,53,69,1);
+  border-color: rgba(220,53,69,0.9);
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .message-sender {
@@ -222,26 +251,25 @@ html, body {
   font-weight: 600;
   color: var(--gold2);
   font-size: 1rem;
-  margin-bottom: 0.5rem;
 }
 
 .message-content {
   font-family: 'Lora', serif;
-  color: rgba(247, 204, 216, 0.9);
-  line-height: 1.5;
+  color: rgba(255,214,218,0.9);
+  line-height: 1.6;
   margin-bottom: 0.5rem;
   white-space: pre-wrap;
 }
 
 .message-time {
-  font-size: 0.8rem;
-  color: rgba(249, 228, 160, 0.6);
+  font-size: 0.78rem;
+  color: rgba(249,228,160,0.5);
   font-style: italic;
 }
 
 #no-messages {
   text-align: center;
-  color: rgba(247, 204, 216, 0.7);
+  color: rgba(255,214,218,0.6);
   font-style: italic;
   padding: 2rem;
 }
@@ -257,7 +285,7 @@ html, body {
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.9s ease;
 }
 
 .stage.active {
@@ -284,13 +312,16 @@ canvas#matrix {
 .bday-popup {
   position: relative;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.75);
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(8, 0, 2, 0.82);
+  border: 1.5px solid rgba(255, 60, 80, 0.7);
   padding: clamp(2rem, 6vw, 3.5rem) clamp(2.5rem, 8vw, 5rem);
   text-align: center;
   opacity: 0;
-  transform: scale(0.8) translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(0.82) translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:
+    0 0 60px rgba(200,10,30,0.25),
+    inset 0 0 40px rgba(200,10,30,0.05);
 }
 
 .bday-popup.show {
@@ -298,9 +329,7 @@ canvas#matrix {
   transform: scale(1) translateY(0);
 }
 
-.bday-popup.instant {
-  transition: none !important;
-}
+.bday-popup.instant { transition: none !important; }
 
 /* Corner decorations */
 .bday-popup::before,
@@ -309,9 +338,9 @@ canvas#matrix {
 .bday-popup .c-bl {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 20px;
-  border-color: #fff;
+  width: 22px;
+  height: 22px;
+  border-color: rgba(255,80,100,0.9);
   border-style: solid;
 }
 
@@ -320,7 +349,6 @@ canvas#matrix {
 .bday-popup .c-tr   { top: -2px; right: -2px; border-width: 2px 2px 0 0; }
 .bday-popup .c-bl   { bottom: -2px; left: -2px; border-width: 0 0 2px 2px; }
 
-/* Birthday text lines */
 .bday-line {
   display: block;
   font-family: 'Playfair Display', serif;
@@ -338,24 +366,24 @@ canvas#matrix {
 .bday-line.reveal span { transform: translateY(0); }
 
 .bday-line.l1 { font-size: clamp(2.8rem, 9vw, 5.2rem); font-weight: 700; }
-.bday-line.l2 { font-size: clamp(2.8rem, 9vw, 5.2rem); font-weight: 700; }
+.bday-line.l2 { font-size: clamp(2.8rem, 9vw, 5.2rem); font-weight: 700; color: var(--scarlet1); }
 .bday-line.l3 { font-size: clamp(1.6rem, 5vw, 2.6rem); font-weight: 400; margin-top: 0.3em; }
-.bday-line.l4 { font-size: clamp(2.2rem, 7vw, 4rem); font-weight: 700; margin-top: 0.05em; }
+.bday-line.l4 { font-size: clamp(2.2rem, 7vw, 4rem); font-weight: 700; color: var(--scarlet1); margin-top: 0.05em; }
 
 .bday-divider {
   height: 1px;
-  background: rgba(255,255,255,0.35);
+  background: linear-gradient(90deg, transparent, rgba(255,80,100,0.6), transparent);
   width: 0;
   margin: 0.8rem auto;
-  transition: width 0.6s ease 0.2s;
+  transition: width 0.7s ease 0.2s;
 }
 
-.bday-popup.show .bday-divider { width: 80px; }
+.bday-popup.show .bday-divider { width: 100px; }
 
 .bday-hearts {
   margin-top: 1.2rem;
   font-size: 1rem;
-  color: #fff;
+  color: var(--crimson1);
   opacity: 0;
   transition: opacity 0.5s ease;
   letter-spacing: 6px;
@@ -365,15 +393,15 @@ canvas#matrix {
 
 .bday-hearts span {
   display: inline-block;
-  animation: pulse 1.4s ease-in-out infinite;
+  animation: heartBeat 1.4s ease-in-out infinite;
 }
 
 .bday-hearts span:nth-child(2) { animation-delay: 0.2s; }
 .bday-hearts span:nth-child(3) { animation-delay: 0.4s; }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.4); opacity: 1; }
+@keyframes heartBeat {
+  0%,100% { transform: scale(1); opacity: 0.6; }
+  50%      { transform: scale(1.5); opacity: 1; }
 }
 
 .continue-hint {
@@ -381,9 +409,9 @@ canvas#matrix {
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255,255,255,0.4);
-  font-size: 0.75rem;
-  letter-spacing: 2px;
+  color: rgba(255,150,160,0.5);
+  font-size: 0.72rem;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   opacity: 0;
   animation: fadeHint 1s ease 5s forwards, bob 2s ease-in-out 5s infinite;
@@ -391,74 +419,72 @@ canvas#matrix {
 }
 
 @keyframes fadeHint { to { opacity: 1; } }
-
 @keyframes bob {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-5px); }
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(-5px); }
 }
 
 /* ═══════════════════════════════════════════════
-   STAGE 2 — WARM CARD SCENE  (Luxury Redesign)
+   STAGE 2 — WARM CARD SCENE  (Red Luxury)
    ═══════════════════════════════════════════════ */
 #stage-warm {
   z-index: 2;
   flex-direction: column;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(180, 60, 100, 0.45) 0%, transparent 50%),
-    radial-gradient(ellipse at 75% 75%, rgba(100, 20, 80, 0.55) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(212, 168, 67, 0.08) 0%, transparent 60%),
-    linear-gradient(145deg, #1a0820 0%, #2e0d28 25%, #3d1535 50%, #1f0a2a 75%, #130818 100%);
+    radial-gradient(ellipse at 25% 20%, rgba(200,20,40,0.5) 0%, transparent 52%),
+    radial-gradient(ellipse at 78% 80%, rgba(140,5,25,0.55) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(212,168,67,0.06) 0%, transparent 60%),
+    linear-gradient(150deg, #150003 0%, #280510 30%, #3a0815 55%, #200408 80%, #0f0204 100%);
 }
 
-/* Silk-sheen overlay */
 #stage-warm::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 15% 10%, rgba(249, 228, 160, 0.18) 0%, transparent 35%),
-    radial-gradient(ellipse at 85% 90%, rgba(232, 131, 158, 0.18) 0%, transparent 35%),
+    radial-gradient(ellipse at 10% 12%, rgba(249,228,160,0.12) 0%, transparent 32%),
+    radial-gradient(ellipse at 90% 88%, rgba(255,120,140,0.14) 0%, transparent 32%),
     repeating-linear-gradient(
-      110deg,
+      115deg,
       transparent 0px,
-      transparent 120px,
-      rgba(255,255,255,0.025) 121px,
-      rgba(255,255,255,0.025) 122px
+      transparent 130px,
+      rgba(255,255,255,0.018) 131px,
+      rgba(255,255,255,0.018) 132px
     );
   z-index: 0;
 }
 
-/* Animated gold shimmer sweep */
+/* Crimson shimmer sweep */
 #stage-warm::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(212, 168, 67, 0.07) 45%,
-    rgba(249, 228, 160, 0.12) 50%,
-    rgba(212, 168, 67, 0.07) 55%,
-    transparent 70%
+    108deg,
+    transparent 28%,
+    rgba(220,30,50,0.06) 44%,
+    rgba(255,80,100,0.10) 50%,
+    rgba(220,30,50,0.06) 56%,
+    transparent 72%
   );
-  animation: shimmerSweep 6s ease-in-out infinite;
+  animation: shimmerSweep 7s ease-in-out infinite;
   z-index: 0;
 }
 
 @keyframes shimmerSweep {
   0%   { transform: translateX(-100%) skewX(-15deg); opacity: 0; }
-  20%  { opacity: 1; }
-  80%  { opacity: 1; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
   100% { transform: translateX(200%) skewX(-15deg); opacity: 0; }
 }
 
 .petal {
   position: absolute;
-  width: 10px;
-  height: 16px;
+  width: 9px;
+  height: 15px;
   border-radius: 60% 10% 60% 10%;
   opacity: 0;
   animation: petalFall linear infinite;
@@ -468,27 +494,26 @@ canvas#matrix {
 
 @keyframes petalFall {
   0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
-  10%  { opacity: 0.7; }
-  90%  { opacity: 0.25; }
-  100% { transform: translateY(110vh) rotate(400deg); opacity: 0; }
+  10%  { opacity: 0.75; }
+  90%  { opacity: 0.2; }
+  100% { transform: translateY(110vh) rotate(420deg); opacity: 0; }
 }
 
-/* Luxury floating sparkle dots */
 .sparkle-dot {
   position: absolute;
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: #f9e4a0;
+  background: var(--scarlet2);
   pointer-events: none;
   z-index: 1;
   animation: sparklePulse ease-in-out infinite;
-  box-shadow: 0 0 6px 2px rgba(249, 228, 160, 0.6);
+  box-shadow: 0 0 6px 2px rgba(255,100,120,0.5);
 }
 
 @keyframes sparklePulse {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
-  50%       { opacity: 1; transform: scale(1.4); }
+  0%,100% { opacity: 0; transform: scale(0.5); }
+  50%      { opacity: 1; transform: scale(1.5); }
 }
 
 #paw-prompt {
@@ -500,28 +525,30 @@ canvas#matrix {
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
   cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
 
 #paw-prompt.show { opacity: 1; transform: translateY(0); }
 
 .paw-emoji {
   font-size: clamp(5rem, 18vw, 8rem);
-  filter: drop-shadow(0 8px 24px rgba(192,98,58,0.25));
-  animation: pawBounce 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 28px rgba(200,10,30,0.4));
+  animation: pawBounce 2.6s ease-in-out infinite;
   display: block;
 }
 
 @keyframes pawBounce {
-  0%, 100% { transform: translateY(0) rotate(-5deg); }
-  50% { transform: translateY(-12px) rotate(5deg); }
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50%      { transform: translateY(-14px) rotate(5deg); }
 }
 
 .paw-label {
   font-family: 'Sacramento', cursive;
-  font-size: clamp(1.6rem, 5vw, 2.4rem);
-  color: var(--gold1);
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  color: var(--blush);
   text-align: center;
-  text-shadow: 0 0 20px rgba(212, 168, 67, 0.5), 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 0 24px rgba(200,10,30,0.55), 0 2px 10px rgba(0,0,0,0.6);
 }
 
 /* 3D Card */
@@ -532,6 +559,8 @@ canvas#matrix {
   display: none;
   opacity: 0;
   transition: opacity 0.6s ease;
+  position: relative;
+  z-index: 2;
 }
 
 #card-inner {
@@ -540,7 +569,7 @@ canvas#matrix {
   position: relative;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
-  transition: transform 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 1.1s cubic-bezier(0.4,0,0.2,1);
 }
 
 #card-inner.open { transform: rotateY(-180deg); }
@@ -556,42 +585,56 @@ canvas#matrix {
 
 /* Front of card */
 #card-front {
-  background: linear-gradient(145deg, #2e0d2c 0%, #4a1540 40%, #6b1e52 70%, #3d1535 100%);
+  background: linear-gradient(145deg, #280208 0%, #4a0515 40%, #6e0a20 70%, #3d0810 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.6),
+    0 22px 65px rgba(0,0,0,0.65),
     0 0 0 1px rgba(212,168,67,0.35),
-    inset 0 0 60px rgba(212,168,67,0.04);
+    0 0 80px rgba(200,10,30,0.12),
+    inset 0 0 60px rgba(200,10,30,0.06);
   cursor: pointer;
-  border: 1.5px solid rgba(212, 168, 67, 0.5);
+  border: 1.5px solid rgba(212,168,67,0.45);
   position: relative;
   overflow: hidden;
 }
 
-/* Gold shimmer line on front card */
+/* Red shimmer on card front */
 #card-front::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    transparent 30%,
-    rgba(212, 168, 67, 0.08) 48%,
-    rgba(249, 228, 160, 0.15) 50%,
-    rgba(212, 168, 67, 0.08) 52%,
-    transparent 70%
+    138deg,
+    transparent 28%,
+    rgba(200,20,40,0.08) 46%,
+    rgba(255,80,100,0.14) 50%,
+    rgba(200,20,40,0.08) 54%,
+    transparent 72%
   );
-  animation: cardShimmer 4s ease-in-out infinite;
+  animation: cardShimmer 4.5s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes cardShimmer {
   0%   { transform: translateX(-100%) skewX(-10deg); }
-  100% { transform: translateX(200%) skewX(-10deg); }
+  100% { transform: translateX(220%) skewX(-10deg); }
+}
+
+/* Gold diagonal stripe accent */
+#card-front::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, transparent 40%, rgba(212,168,67,0.08) 60%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 #card-front .front-paw { font-size: clamp(4rem, 14vw, 6rem); }
@@ -602,27 +645,26 @@ canvas#matrix {
   color: var(--gold1);
   text-align: center;
   line-height: 1.3;
-  text-shadow: 0 0 30px rgba(212,168,67,0.5), 0 2px 8px rgba(0,0,0,0.5);
+  text-shadow: 0 0 30px rgba(212,168,67,0.5), 0 2px 8px rgba(0,0,0,0.6);
 }
 
 #card-front .tap-hint {
-  font-size: 0.75rem;
-  color: rgba(249, 228, 160, 0.7);
-  letter-spacing: 2px;
+  font-size: 0.72rem;
+  color: rgba(255,200,210,0.65);
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  opacity: 0.8;
-  animation: bob2 2s ease-in-out infinite;
-  margin-top: 0.5rem;
+  animation: bob2 2.2s ease-in-out infinite;
+  margin-top: 0.4rem;
 }
 
 @keyframes bob2 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
 }
 
 /* Back of card */
 #card-back {
-  background: linear-gradient(155deg, #1e0f22 0%, #2a1230 50%, #1f1028 100%);
+  background: linear-gradient(155deg, #160205 0%, #220408 50%, #180306 100%);
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
@@ -630,19 +672,18 @@ canvas#matrix {
   justify-content: space-between;
   padding: 1.5rem;
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(212,168,67,0.3),
-    inset 0 0 50px rgba(212,168,67,0.03);
-  border: 1.5px solid rgba(212, 168, 67, 0.4);
+    0 22px 65px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(212,168,67,0.28),
+    inset 0 0 50px rgba(200,10,30,0.04);
+  border: 1.5px solid rgba(212,168,67,0.38);
 }
 
 .card-back-top {
   font-family: 'Sacramento', cursive;
-  font-size: clamp(3.5rem, 6.5vw, 2rem);
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
   color: var(--gold1);
-  text-shadow: 0 0 20px rgba(212,168,67,0.4);
+  text-shadow: 0 0 20px rgba(212,168,67,0.45);
   text-align: center;
-  transform: translateX(0px) translateY(40px);
 }
 
 .pets-row {
@@ -662,15 +703,10 @@ canvas#matrix {
   position: relative;
 }
 
-/* ═══════════════════════════════════════════════
-   CHAT BUBBLES
-   
-   --bx = horizontal offset (negative = left)
-   --by = vertical offset (negative = up)
-   ═══════════════════════════════════════════════ */
+/* Chat Bubbles */
 .chat-bubble {
-  background: linear-gradient(135deg, #2e1230 0%, #3d1840 100%);
-  border: 1.5px solid rgba(212, 168, 67, 0.4);
+  background: linear-gradient(135deg, #280508 0%, #3d0812 100%);
+  border: 1.5px solid rgba(212,168,67,0.4);
   border-radius: 16px 16px 16px 4px;
   padding: 0.5rem 0.85rem;
   font-size: clamp(0.65rem, 2vw, 0.8rem);
@@ -678,7 +714,7 @@ canvas#matrix {
   font-family: 'Lora', serif;
   font-style: italic;
   white-space: nowrap;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 3px 14px rgba(0,0,0,0.45);
   opacity: 0;
   position: absolute;
   bottom: calc(100% + 8px);
@@ -701,7 +737,7 @@ canvas#matrix {
   bottom: -8px;
   left: 18px;
   border: 4px solid transparent;
-  border-top-color: rgba(212, 168, 67, 0.5);
+  border-top-color: rgba(212,168,67,0.5);
 }
 
 .chat-bubble.right {
@@ -720,28 +756,19 @@ canvas#matrix {
 .chat-bubble.right::after {
   left: auto;
   right: 18px;
-  border-top-color: rgba(212, 168, 67, 0.5);
+  border-top-color: rgba(212,168,67,0.5);
 }
 
-/* ═══════════════════════════════════════════════
-   PET IMAGES & EMOJIS
-   
-   --px = horizontal offset (negative = left, positive = right)
-   --py = vertical offset (negative = up, positive = down)
-   
-   Example: style="--px: -20px; --py: -10px;"
-   ═══════════════════════════════════════════════ */
+/* Pet Images & Emojis */
 .pet-img {
-  
   width: clamp(100px, 22vw, 130px);
   height: clamp(100px, 22vw, 130px);
   object-fit: contain;
   border-radius: 12px;
-  filter: drop-shadow(0 4px 12px rgba(192,98,58,0.2));
+  filter: drop-shadow(0 4px 14px rgba(200,10,30,0.25));
   opacity: 0;
   transform: translateX(var(--px, 0px)) translateY(calc(20px + var(--py, 0px)));
   transition: opacity 0.6s ease, transform 0.6s ease;
-  
 }
 
 .pet-img.show {
@@ -765,11 +792,10 @@ canvas#matrix {
 
 .pet-name {
   font-family: 'Sacramento', cursive;
-  font-size: clamp(2.5rem, 3.5vw, 1.4rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: var(--gold2);
   opacity: 0;
   transition: opacity 0.5s ease 0.3s;
-  transform: translateX(0px) translateY(-40px);
 }
 
 .pet-name.show { opacity: 1; }
@@ -777,13 +803,12 @@ canvas#matrix {
 .card-back-bottom {
   font-family: 'Lora', serif;
   font-style: italic;
-  font-size: clamp(1.25rem, 1.5vw, 0.67rem);
-  color: rgba(247, 204, 216, 0.85);
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: rgba(255,214,218,0.82);
   text-align: center;
   opacity: 0;
   transition: opacity 0.6s ease;
   padding: 0 0.5rem;
-  transform: translateX(0px) translateY(-25px);
 }
 
 .card-back-bottom.show { opacity: 1; }
@@ -813,27 +838,26 @@ canvas#matrix {
 }
 
 #surprise-btn {
-  background: linear-gradient(135deg, #6b1e52 0%, #9a2868 50%, #5c1a42 100%);
+  background: linear-gradient(135deg, #7a0818 0%, #b01030 50%, #6a0815 100%);
   color: var(--gold1);
-  border: 1.5px solid rgba(212, 168, 67, 0.5);
+  border: 1.5px solid rgba(212,168,67,0.5);
   border-radius: 50px;
   padding: 0.85rem 1.5rem;
   font-family: 'Lora', serif;
   font-size: clamp(0.8rem, 2.5vw, 1rem);
   font-style: italic;
   cursor: pointer;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 0 0 0px rgba(212,168,67,0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+  box-shadow: 0 6px 26px rgba(160,10,30,0.4), 0 0 0 0px rgba(212,168,67,0.2);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   white-space: nowrap;
 }
 
 #surprise-btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #8a2860 0%, #b83078 50%, #7a2050 100%);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.55), 0 0 15px rgba(212,168,67,0.15);
-  border-color: rgba(212, 168, 67, 0.8);
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #9a0e22 0%, #d01840 50%, #8a0e1e 100%);
+  box-shadow: 0 12px 34px rgba(180,10,30,0.5), 0 0 18px rgba(212,168,67,0.18);
+  border-color: rgba(212,168,67,0.85);
 }
-#surprise-btn:active { transform: scale(0.97); }
 
 #choice-wrap {
   display: flex;
@@ -851,7 +875,7 @@ canvas#matrix {
 }
 
 .choice-btn {
-  border: 1.5px solid rgba(212, 168, 67, 0.5);
+  border: 1.5px solid rgba(212,168,67,0.45);
   border-radius: 50px;
   padding: 0.55rem 1.2rem;
   font-family: 'Lora', serif;
@@ -859,27 +883,30 @@ canvas#matrix {
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.25s ease;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 }
 
 #btn-yes {
-  background: linear-gradient(135deg, #7b2560 0%, #a83070 100%);
+  background: linear-gradient(135deg, #7a0818 0%, #b01030 100%);
   color: var(--gold1);
-  border-color: rgba(212, 168, 67, 0.55);
+  border-color: rgba(212,168,67,0.55);
 }
+
 #btn-yes:hover {
-  background: linear-gradient(135deg, #9a2870 0%, #c04080 100%);
-  border-color: rgba(212, 168, 67, 0.85);
+  background: linear-gradient(135deg, #9a0e22 0%, #d01840 100%);
+  border-color: rgba(212,168,67,0.9);
   transform: translateY(-2px);
 }
+
 #btn-notyet {
-  background: rgba(30, 10, 28, 0.65);
-  color: var(--gold1);
-  border-color: rgba(212, 168, 67, 0.35);
+  background: rgba(25, 3, 8, 0.7);
+  color: var(--blush);
+  border-color: rgba(212,168,67,0.3);
 }
+
 #btn-notyet:hover {
-  background: rgba(60, 20, 50, 0.8);
-  border-color: rgba(212, 168, 67, 0.7);
+  background: rgba(60,8,18,0.85);
+  border-color: rgba(212,168,67,0.65);
   transform: translateY(-2px);
 }
 
@@ -890,8 +917,8 @@ canvas#matrix {
   transform: translate(-50%, -50%);
   font-family: 'Sacramento', cursive;
   font-size: clamp(2.5rem, 8vw, 4.5rem);
-  color: var(--gold1);
-  text-shadow: 0 0 30px rgba(212,168,67,0.6);
+  color: var(--blush);
+  text-shadow: 0 0 35px rgba(200,10,30,0.7);
   pointer-events: none;
   opacity: 0;
   z-index: 30;
@@ -900,22 +927,22 @@ canvas#matrix {
 #taketime-text.show { animation: takeTimeAnim 2.5s ease forwards; }
 
 @keyframes takeTimeAnim {
-  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
-  25%  { opacity: 1; transform: translate(-50%, -60%) scale(1); }
-  70%  { opacity: 1; transform: translate(-50%, -65%) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -75%) scale(1.05); }
+  0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.85); }
+  25%  { opacity: 1; transform: translate(-50%,-60%) scale(1); }
+  70%  { opacity: 1; transform: translate(-50%,-65%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-75%) scale(1.05); }
 }
 
 /* ═══════════════════════════════════════════════
-   STAGE 3 — CHOICE SCREEN  (Luxury Redesign)
+   STAGE 3 — CHOICE SCREEN  (Red Luxury)
    ═══════════════════════════════════════════════ */
 #stage-yes {
   z-index: 3;
   background:
-    radial-gradient(ellipse at 40% 30%, rgba(180, 60, 110, 0.5) 0%, transparent 55%),
-    radial-gradient(ellipse at 70% 75%, rgba(90, 20, 70, 0.6) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(212, 168, 67, 0.1) 0%, transparent 65%),
-    linear-gradient(160deg, #120810 0%, #200d1e 30%, #2e1030 55%, #1a0820 80%, #0f0814 100%);
+    radial-gradient(ellipse at 38% 28%, rgba(200,20,45,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 72% 78%, rgba(130,5,20,0.6) 0%, transparent 52%),
+    radial-gradient(ellipse at 50% 50%, rgba(212,168,67,0.07) 0%, transparent 65%),
+    linear-gradient(158deg, #100205 0%, #1e0408 30%, #2e0810 55%, #18040a 80%, #0c0204 100%);
   flex-direction: column;
   gap: 2rem;
   text-align: center;
@@ -923,46 +950,44 @@ canvas#matrix {
   overflow: hidden;
 }
 
-/* Luxury starfield dots for stage 3 */
 #stage-yes::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(1px 1px at 15% 20%, rgba(249,228,160,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 35% 55%, rgba(249,228,160,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 60% 15%, rgba(249,228,160,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 80% 40%, rgba(249,228,160,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 25% 80%, rgba(249,228,160,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 70% 85%, rgba(249,228,160,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 90% 10%, rgba(249,228,160,0.5) 0%, transparent 100%),
-    radial-gradient(2px 2px at 50% 50%, rgba(232,131,158,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 10% 65%, rgba(249,228,160,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 45% 30%, rgba(249,228,160,0.6) 0%, transparent 100%);
-  animation: starsShift 20s linear infinite;
+    radial-gradient(1px 1px at 15% 20%, rgba(255,180,190,0.65) 0%, transparent 100%),
+    radial-gradient(1px 1px at 38% 55%, rgba(255,180,190,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 62% 18%, rgba(249,228,160,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 42%, rgba(255,180,190,0.65) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22% 82%, rgba(249,228,160,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 88%, rgba(255,180,190,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 12%, rgba(249,228,160,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 48% 48%, rgba(255,100,120,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 8% 62%, rgba(249,228,160,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 44% 32%, rgba(255,180,190,0.5) 0%, transparent 100%);
+  animation: starsShift 22s linear infinite;
 }
 
-/* Gold veil shimmer for stage 3 */
 #stage-yes::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background: linear-gradient(
-    115deg,
-    transparent 25%,
-    rgba(212, 168, 67, 0.06) 42%,
-    rgba(249, 228, 160, 0.1) 50%,
-    rgba(212, 168, 67, 0.06) 58%,
-    transparent 75%
+    118deg,
+    transparent 26%,
+    rgba(200,20,40,0.06) 44%,
+    rgba(255,60,80,0.09) 50%,
+    rgba(200,20,40,0.06) 56%,
+    transparent 74%
   );
-  animation: shimmerSweep 8s ease-in-out infinite;
+  animation: shimmerSweep 9s ease-in-out infinite;
 }
 
 @keyframes starsShift {
   0%   { transform: translateY(0) translateX(0); }
-  50%  { transform: translateY(-8px) translateX(4px); }
+  50%  { transform: translateY(-9px) translateX(5px); }
   100% { transform: translateY(0) translateX(0); }
 }
 
@@ -970,10 +995,10 @@ canvas#matrix {
   font-family: 'Sacramento', cursive;
   font-size: clamp(3rem, 10vw, 5.5rem);
   color: var(--gold1);
-  text-shadow: 0 0 40px rgba(212,168,67,0.6), 0 4px 16px rgba(0,0,0,0.5);
+  text-shadow: 0 0 45px rgba(212,168,67,0.6), 0 4px 18px rgba(0,0,0,0.5);
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+  transition: opacity 0.85s ease 0.2s, transform 0.85s ease 0.2s;
   position: relative;
   z-index: 1;
 }
@@ -981,13 +1006,13 @@ canvas#matrix {
 #stage-yes p {
   font-family: 'Lora', serif;
   font-style: italic;
-  color: rgba(247, 204, 216, 0.85);
+  color: rgba(255,214,218,0.85);
   font-size: clamp(1rem, 3vw, 1.3rem);
   max-width: 420px;
   line-height: 1.7;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
+  transition: opacity 0.85s ease 0.4s, transform 0.85s ease 0.4s;
   position: relative;
   z-index: 1;
 }
@@ -1002,7 +1027,7 @@ canvas#matrix {
   justify-content: center;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+  transition: opacity 0.85s ease 0.6s, transform 0.85s ease 0.6s;
   position: relative;
   z-index: 1;
 }
@@ -1010,9 +1035,9 @@ canvas#matrix {
 #stage-yes.active .choice-buttons-row { opacity: 1; transform: translateY(0); }
 
 .big-choice-btn {
-  background: linear-gradient(135deg, #7b2560 0%, #a83070 50%, #6b1e52 100%);
+  background: linear-gradient(135deg, #7a0818 0%, #b01030 50%, #6a0815 100%);
   color: var(--gold1);
-  border: 1.5px solid rgba(212, 168, 67, 0.55);
+  border: 1.5px solid rgba(212,168,67,0.55);
   border-radius: 50px;
   padding: 1rem 2.4rem;
   font-family: 'Lora', serif;
@@ -1020,33 +1045,34 @@ canvas#matrix {
   font-style: italic;
   cursor: pointer;
   box-shadow:
-    0 8px 28px rgba(0,0,0,0.5),
+    0 8px 30px rgba(0,0,0,0.5),
     0 0 0 0px rgba(212,168,67,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.1);
+    inset 0 1px 0 rgba(255,255,255,0.08);
   transition: transform 0.25s, box-shadow 0.25s, background 0.25s, border-color 0.25s;
   letter-spacing: 0.03em;
 }
 
 .big-choice-btn:hover {
-  background: linear-gradient(135deg, #a83070 0%, #c04070 50%, #8a2860 100%);
-  border-color: rgba(212, 168, 67, 0.85);
-  transform: translateY(-4px);
+  background: linear-gradient(135deg, #9a0e22 0%, #d01840 50%, #8a0e1e 100%);
+  border-color: rgba(212,168,67,0.9);
+  transform: translateY(-5px);
   box-shadow:
-    0 14px 40px rgba(0,0,0,0.55),
-    0 0 20px rgba(212,168,67,0.2);
+    0 16px 44px rgba(0,0,0,0.55),
+    0 0 22px rgba(212,168,67,0.2),
+    0 0 30px rgba(200,10,30,0.2);
 }
 
 /* ═══════════════════════════════════════════════
-   OVERLAYS (Wife & Friends)  — Luxury Redesign
+   OVERLAYS (Wife & Friends)
    ═══════════════════════════════════════════════ */
 .overlay {
   position: fixed;
   inset: 0;
   z-index: 100;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(160, 50, 100, 0.45) 0%, transparent 55%),
-    radial-gradient(ellipse at 75% 80%, rgba(80, 15, 65, 0.55) 0%, transparent 50%),
-    linear-gradient(160deg, #0d0712 0%, #1a0d1e 40%, #24102a 70%, #100910 100%);
+    radial-gradient(ellipse at 28% 18%, rgba(180,15,35,0.5) 0%, transparent 55%),
+    radial-gradient(ellipse at 78% 82%, rgba(120,5,20,0.55) 0%, transparent 52%),
+    linear-gradient(158deg, #0a0104 0%, #180306 40%, #220508 70%, #100205 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1057,20 +1083,19 @@ canvas#matrix {
   padding: 2rem 1rem;
 }
 
-/* Subtle gold grain texture overlay */
 .overlay::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(1px 1px at 10% 15%, rgba(249,228,160,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 30% 70%, rgba(249,228,160,0.35) 0%, transparent 100%),
-    radial-gradient(1px 1px at 55% 25%, rgba(249,228,160,0.55) 0%, transparent 100%),
-    radial-gradient(1px 1px at 75% 60%, rgba(249,228,160,0.45) 0%, transparent 100%),
-    radial-gradient(1px 1px at 90% 85%, rgba(249,228,160,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 20% 45%, rgba(232,131,158,0.35) 0%, transparent 100%),
-    radial-gradient(1px 1px at 65% 90%, rgba(249,228,160,0.5) 0%, transparent 100%);
+    radial-gradient(1px 1px at 12% 18%, rgba(255,180,190,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 32% 72%, rgba(249,228,160,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 58% 28%, rgba(255,180,190,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 78% 62%, rgba(249,228,160,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 88%, rgba(255,180,190,0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22% 48%, rgba(249,228,160,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 68% 92%, rgba(255,180,190,0.45) 0%, transparent 100%);
   z-index: 0;
 }
 
@@ -1083,8 +1108,8 @@ canvas#matrix {
   position: absolute;
   top: 1.2rem;
   right: 1.4rem;
-  background: rgba(60, 20, 50, 0.7);
-  border: 1.5px solid rgba(212, 168, 67, 0.4);
+  background: rgba(80, 5, 15, 0.78);
+  border: 1.5px solid rgba(212,168,67,0.4);
   color: var(--gold1);
   border-radius: 50%;
   width: 40px;
@@ -1096,22 +1121,21 @@ canvas#matrix {
   justify-content: center;
   transition: background 0.2s, transform 0.2s, border-color 0.2s;
   z-index: 110;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 }
 
 .overlay-close:hover {
-  background: rgba(100, 30, 80, 0.8);
-  border-color: rgba(212, 168, 67, 0.8);
+  background: rgba(150,10,30,0.9);
+  border-color: rgba(212,168,67,0.9);
   transform: scale(1.1);
 }
 
-/* Navigation arrows */
 .nav-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(60, 20, 50, 0.65);
-  border: 1.5px solid rgba(212, 168, 67, 0.35);
+  background: rgba(70, 5, 15, 0.72);
+  border: 1.5px solid rgba(212,168,67,0.35);
   color: var(--gold1);
   border-radius: 50%;
   width: 44px;
@@ -1124,12 +1148,13 @@ canvas#matrix {
   transition: background 0.2s, transform 0.2s, border-color 0.2s;
   z-index: 10;
   flex-shrink: 0;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
 }
 
 .nav-arrow:hover {
-  background: rgba(100, 30, 80, 0.8);
-  border-color: rgba(212, 168, 67, 0.75);
+  background: rgba(140,10,28,0.85);
+  border-color: rgba(212,168,67,0.8);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .left-arrow  { left: -1.5rem; }
@@ -1150,17 +1175,17 @@ canvas#matrix {
 }
 
 .letter-paper {
-  background: linear-gradient(160deg, #1e0f22 0%, #2a1230 50%, #1a0e20 100%);
-  border-radius: 14px;
+  background: linear-gradient(160deg, #160204 0%, #220508 50%, #160306 100%);
+  border-radius: 16px;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   max-height: 70vh;
   overflow-y: auto;
   width: 100%;
   box-shadow:
-    0 24px 70px rgba(0,0,0,0.7),
-    0 0 0 1px rgba(212,168,67,0.3),
-    inset 0 0 40px rgba(212,168,67,0.03);
-  border: 1px solid rgba(212, 168, 67, 0.35);
+    0 26px 75px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(212,168,67,0.28),
+    inset 0 0 40px rgba(180,10,30,0.04);
+  border: 1px solid rgba(212,168,67,0.32);
   position: relative;
   z-index: 1;
 }
@@ -1171,30 +1196,29 @@ canvas#matrix {
   color: var(--gold1);
   text-align: center;
   margin-bottom: 1.2rem;
-  border-bottom: 1px solid rgba(212, 168, 67, 0.25);
+  border-bottom: 1px solid rgba(200,10,30,0.3);
   padding-bottom: 0.8rem;
-  text-shadow: 0 0 20px rgba(212,168,67,0.4);
+  text-shadow: 0 0 22px rgba(212,168,67,0.45);
 }
 
 .letter-body {
   font-family: 'Lora', serif;
   font-style: italic;
   font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-  color: rgba(247, 220, 230, 0.9);
+  color: rgba(255,220,228,0.92);
   line-height: 1.9;
   white-space: pre-wrap;
 }
 
 .letter-cursor {
   display: inline-block;
-  color: var(--gold2);
+  color: var(--crimson1);
   animation: blink 0.8s step-end infinite;
   font-family: 'Lora', serif;
   font-size: 1.1rem;
 }
 
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 .letter-cursor.done { display: none; }
 
 /* ═══════════════════════════════════════════════
@@ -1204,11 +1228,12 @@ canvas#matrix {
   width: 100%;
   max-width: 560px;
   aspect-ratio: 16/9;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.7),
-    0 0 0 1px rgba(212, 168, 67, 0.3);
+    0 22px 64px rgba(0,0,0,0.72),
+    0 0 0 1px rgba(212,168,67,0.28),
+    0 0 40px rgba(180,10,30,0.12);
 }
 
 .video-wrapper iframe {
@@ -1230,7 +1255,7 @@ canvas#matrix {
   font-family: 'Sacramento', cursive;
   font-size: clamp(1.6rem, 5vw, 2.2rem);
   color: var(--gold1);
-  text-shadow: 0 0 20px rgba(212,168,67,0.45);
+  text-shadow: 0 0 22px rgba(212,168,67,0.5);
   position: relative;
   z-index: 1;
 }
@@ -1239,7 +1264,7 @@ canvas#matrix {
   display: block;
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.1rem, 3.5vw, 1.5rem);
-  color: #fff;
+  color: var(--blush);
   margin-top: 0.3rem;
   transition: opacity 0.3s ease;
 }
@@ -1260,19 +1285,15 @@ canvas#matrix {
   max-width: 560px;
   display: flex;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 14px;
   touch-action: pan-y;
   cursor: grab;
+  box-shadow: 0 0 0 1px rgba(212,168,67,0.22);
 }
 
 .friends-slider:active { cursor: grabbing; }
+.friend-slide { flex: 0 0 100%; width: 100%; }
 
-.friend-slide {
-  flex: 0 0 100%;
-  width: 100%;
-}
-
-/* Dot indicators */
 .slider-dots {
   display: flex;
   gap: 8px;
@@ -1283,15 +1304,15 @@ canvas#matrix {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(212, 168, 67, 0.25);
-  border: 1px solid rgba(212, 168, 67, 0.35);
+  background: rgba(200,20,40,0.25);
+  border: 1px solid rgba(200,20,40,0.4);
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
 }
 
 .slider-dot.active {
-  background: var(--gold2);
-  border-color: var(--gold1);
-  transform: scale(1.3);
-  box-shadow: 0 0 6px rgba(212,168,67,0.5);
+  background: var(--crimson1);
+  border-color: var(--scarlet1);
+  transform: scale(1.35);
+  box-shadow: 0 0 8px rgba(255,30,50,0.55);
 }
