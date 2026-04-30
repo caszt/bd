@@ -261,11 +261,12 @@
 <script>
   // REPLACE THESE WITH YOUR SUPABASE PROJECT DETAILS
   // Find them at: Supabase Dashboard → Settings → API
-  const SUPABASE_URL = 'https://dulhnhngbkkjoblxvkim.supabase.co/rest/v1/';
+  const SUPABASE_URL = 'https://dulhnhngbkkjoblxvkim.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_U1a3ESaIHh0iyc-lvux-EA_u0mQs3Qo';
 
   // Initialize Supabase
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const { createClient } = window.supabase;
+  const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // Chat modal elements
   const chatBtn = document.getElementById('chat-btn');
@@ -275,10 +276,15 @@
   const messagesList = document.getElementById('messages-list');
   const noMessages = document.getElementById('no-messages');
 
+  // Debug: Check if elements exist
+  console.log('Chat button found:', chatBtn);
+  console.log('Modal found:', messagesModal);
+
   let unreadCount = 0;
 
   // Show/hide modal
   chatBtn.addEventListener('click', () => {
+    console.log('Chat button clicked!');
     messagesModal.classList.add('open');
     markAllAsRead();
   });
@@ -295,7 +301,7 @@
 
   // Function to mark messages as read
   async function markAllAsRead() {
-    const { error } = await supabase
+    const { error } = await supabaseClient
       .from('messages')
       .update({ read: true })
       .eq('read', false);
@@ -307,7 +313,7 @@
 
   // Function to load and display messages
   async function loadMessages() {
-    const { data: messages, error } = await supabase
+    const { data: messages, error } = await supabaseClient
       .from('messages')
       .select('*')
       .order('timestamp', { ascending: false });
@@ -347,7 +353,7 @@
   loadMessages();
 
   // Real-time listener for new messages
-  supabase
+  supabaseClient
     .channel('messages')
     .on('postgres_changes', {
       event: '*',
