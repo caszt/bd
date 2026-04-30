@@ -256,25 +256,16 @@
 
 <script src="script.js"></script>
 
-<!-- Firebase Chat System -->
-<script type="module">
-  // Firebase imports
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-  import { getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+<!-- Supabase Chat System -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // REPLACE THESE WITH YOUR SUPABASE PROJECT DETAILS
+  // Find them at: Supabase Dashboard → Settings → API
+  const SUPABASE_URL = 'https://dulhnhngbkkjoblxvkim.supabase.co/rest/v1/';
+  const SUPABASE_ANON_KEY = 'sb_publishable_U1a3ESaIHh0iyc-lvux-EA_u0mQs3Qo';
 
-  // Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyAINMc8-eSmHDr3h7XoE2T5oXm8lqIK8qI",
-    authDomain: "birthday-surprise-ca09a.firebaseapp.com",
-    projectId: "birthday-surprise-ca09a",
-    storageBucket: "birthday-surprise-ca09a.firebasestorage.app",
-    messagingSenderId: "631812025900",
-    appId: "1:631812025900:web:3d948f5023b46e3cf7ab89"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  // Initialize Supabase
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // Chat modal elements
   const chatBtn = document.getElementById('chat-btn');
@@ -304,26 +295,27 @@
 
   // Function to mark messages as read
   async function markAllAsRead() {
-    const q = query(collection(db, 'messages'), orderBy('timestamp', 'desc'));
-    const querySnapshot = await getDocs(q);
+    const { error } = await supabase
+      .from('messages')
+      .update({ read: true })
+      .eq('read', false);
 
-    const updatePromises = [];
-    querySnapshot.forEach((document) => {
-      if (!document.data().read) {
-        updatePromises.push(updateDoc(doc(db, 'messages', document.id), { read: true }));
-      }
-    });
-
-    await Promise.all(updatePromises);
+    if (error) {
+      console.error('Error marking messages as read:', error);
+    }
   }
 
-  // Real-time listener for messages
-  const q = query(collection(db, 'messages'), orderBy('timestamp', 'desc'));
-  onSnapshot(q, (querySnapshot) => {
-    const messages = [];
-    querySnapshot.forEach((doc) => {
-      messages.push({ id: doc.id, ...doc.data() });
-    });
+  // Function to load and display messages
+  async function loadMessages() {
+    const { data: messages, error } = await supabase
+      .from('messages')
+      .select('*')
+      .order('timestamp', { ascending: false });
+
+    if (error) {
+      console.error('Error loading messages:', error);
+      return;
+    }
 
     // Update UI
     messagesList.innerHTML = '';
@@ -339,7 +331,7 @@
         messageDiv.innerHTML = `
           <div class="message-sender">${msg.sender}</div>
           <div class="message-content">${msg.content}</div>
-          <div class="message-time">${new Date(msg.timestamp.seconds * 1000).toLocaleString()}</div>
+          <div class="message-time">${new Date(msg.timestamp).toLocaleString()}</div>
         `;
         messagesList.appendChild(messageDiv);
       });
@@ -349,7 +341,23 @@
     messageBadge.textContent = unreadCount;
     messageBadge.style.display = unreadCount > 0 ? 'inline-block' : 'none';
     chatBtn.classList.toggle('has-messages', unreadCount > 0);
-  });
+  }
+
+  // Load messages initially
+  loadMessages();
+
+  // Real-time listener for new messages
+  supabase
+    .channel('messages')
+    .on('postgres_changes', {
+      event: '*',
+      schema: 'public',
+      table: 'messages'
+    }, (payload) => {
+      console.log('Real-time update:', payload);
+      loadMessages(); // Reload messages when changes occur
+    })
+    .subscribe();
 </script>
 </body>
 </html>
