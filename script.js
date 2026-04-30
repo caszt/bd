@@ -5,17 +5,17 @@
 // ─── WIFE LETTER TEXT ───────────────────────────
 // ★★★ TYPE YOUR LETTER HERE ★★★
 // Use \n for new lines, \n\n for paragraph breaks.
-const WIFE_LETTER = `My dearest love,
+const WIFE_LETTER = `My dearest, Cassey,
 
-Happy Birthday! 🎂
+Happy Birthday!
 
-Every single day with you is a gift I never want to return. You make the ordinary feel extraordinary just by being in it.
+On this very special day, I just want you to know how special you are to me. For every day we share, I could not help but fall for you more and more.
+The moment you looked at me with those affectionate eyes, I knew I would never let myself be without you. This day is so much special to me because it became the reason why I was able to meet you in this lifetime.
+I want you to know that I am always here for you every step of the way. I will be your number one support, and be your cry buddy whenever you feel down. All our moments up until now will always be cherished by me, because you are important and special in my heart.
+So, enjoy this very day for me, and I hope you will have a blast! I love you so much, and I am looking forward to meeting you soon. Happy birthday again, my love!
 
-I hope today reminds you of how deeply you are loved — not just by me, but by everyone lucky enough to know you.
-
-Here's to you, to us, and to every adventure still ahead.
-
-All my love, always. ♡`;
+With all my love,
+Kit`;
 // ─────────────────────────────────────────────────
 
 // ─── STATE & PERSISTENCE ─────────────────────────
@@ -59,6 +59,14 @@ function switchStage(toStage, instant = false) {
     homeBtn.classList.add('visible');
   } else {
     homeBtn.classList.remove('visible');
+  }
+
+  // Show/hide chat button (only on wife/friends choice stage)
+  const chatBtn = document.getElementById('chat-btn');
+  if (toStage === 'yes') {
+    chatBtn.classList.add('visible');
+  } else {
+    chatBtn.classList.remove('visible');
   }
 }
 
