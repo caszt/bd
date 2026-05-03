@@ -721,7 +721,7 @@ canvas#matrix {
   left: 50%;
   transform-origin: bottom left;
   --bx: -55%;
-  --by: -50px;
+  --by: -70px;
   transform: translateX(var(--bx)) translateY(calc(8px + var(--by))) scale(0.9);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
@@ -745,7 +745,7 @@ canvas#matrix {
   left: auto;
   right: 50%;
   --bx: 65%;
-  --by: -50px;
+  --by: -80px;
   transform: translateX(var(--bx)) translateY(calc(8px + var(--by))) scale(0.9);
 }
 
