@@ -687,7 +687,7 @@ canvas#matrix {
   color: var(--gold1);
   text-shadow: 0 0 20px rgba(212,168,67,0.45);
   text-align: center;
-  transform: translateX(var(--px, 0px)) translateY(var(--py, -10px));
+  transform: translateX(var(--px, 0px)) translateY(var(--py, 10px));
 }
 
 .pets-row {
