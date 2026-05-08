@@ -408,18 +408,32 @@ document.getElementById('wife-close').addEventListener('click', () => {
 // FRIENDS OVERLAY — SLIDER + DOTS + SWIPE
 // ═══════════════════════════════════════════════
 const friendsOverlay = document.getElementById('friends-overlay');
-const friendsSlider  = document.getElementById('friends-slider');
+const friendsSlider  = document.getElementById('friends-slider');   // viewport
+const friendsTrack   = document.getElementById('friends-track');    // moves
 const sliderDots     = document.getElementById('slider-dots');
 const friendLabel    = document.getElementById('friend-name-label');
 
-const slides = Array.from(friendsSlider.querySelectorAll('.friend-slide'));
+const slides = Array.from(friendsTrack.querySelectorAll('.friend-slide'));
 let currentSlide = 0;
 let dotsCreated  = false;
 
+// After layout: set each slide to exactly the viewport width
+function calibrateSlides() {
+  const vpWidth = friendsSlider.offsetWidth;
+  slides.forEach(s => { s.style.flex = `0 0 ${vpWidth}px`; });
+  friendsTrack.style.width = (vpWidth * slides.length) + 'px';
+}
+
 function openFriendsOverlay() {
   friendsOverlay.classList.add('open');
-  if (!dotsCreated) buildDots();
-  goToSlide(0, false);
+  // Calibrate after the overlay is visible (so offsetWidth is real)
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      calibrateSlides();
+      if (!dotsCreated) buildDots();
+      goToSlide(0, false);
+    });
+  });
 }
 
 function buildDots() {
@@ -435,10 +449,10 @@ function buildDots() {
 
 function goToSlide(idx, animate = true) {
   currentSlide = Math.max(0, Math.min(idx, slides.length - 1));
+  const offset = currentSlide * friendsSlider.offsetWidth;
 
-  // Translate slider
-  friendsSlider.style.transition = animate ? 'transform 0.4s cubic-bezier(0.4,0,0.2,1)' : 'none';
-  friendsSlider.style.transform  = `translateX(-${currentSlide * 100}%)`;
+  friendsTrack.style.transition = animate ? 'transform 0.4s cubic-bezier(0.4,0,0.2,1)' : 'none';
+  friendsTrack.style.transform  = `translateX(-${offset}px)`;
 
   // Update dots
   const dots = sliderDots.querySelectorAll('.slider-dot');
@@ -454,7 +468,7 @@ function goToSlide(idx, animate = true) {
     }, 150);
   }
 
-  // Update arrow visibility
+  // Arrow visibility
   document.getElementById('friends-prev').style.visibility = currentSlide === 0 ? 'hidden' : 'visible';
   document.getElementById('friends-next').style.visibility = currentSlide === slides.length - 1 ? 'hidden' : 'visible';
 }
@@ -494,8 +508,8 @@ friendsSlider.addEventListener('touchend', e => {
 });
 
 // ─── Mouse drag for friends slider ───
-let mouseStartX   = 0;
-let mouseDown     = false;
+let mouseStartX = 0;
+let mouseDown   = false;
 
 friendsSlider.addEventListener('mousedown', e => {
   mouseStartX = e.clientX;
@@ -506,9 +520,9 @@ friendsSlider.addEventListener('mousedown', e => {
 window.addEventListener('mousemove', e => {
   if (!mouseDown) return;
   const dx = e.clientX - mouseStartX;
-  // Live preview
-  friendsSlider.style.transition = 'none';
-  friendsSlider.style.transform  = `translateX(calc(-${currentSlide * 100}% + ${dx}px))`;
+  const base = currentSlide * friendsSlider.offsetWidth;
+  friendsTrack.style.transition = 'none';
+  friendsTrack.style.transform  = `translateX(${-base + dx}px)`;
 });
 
 window.addEventListener('mouseup', e => {
