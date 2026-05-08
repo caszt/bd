@@ -94,7 +94,7 @@
               --px = horizontal offset (negative = left)
               --py = vertical offset (negative = up)
             -->
-           <img class="pet-img" src="Untitled1_20260503215916.png" alt="cat" id="cat-img" />
+            <span class="pet-emoji" id="cat-emoji" style="--px: 0px; --py: -40px;">🐱</span>
             <span class="pet-name" id="cat-name">Eloy</span>
           </div>
 
@@ -113,7 +113,7 @@
               To move the image, add inline style:
               style="--px: 0px; --py: 0px;"
             -->
-            <img class="pet-img" src="Untitled1_20260503215151.png" alt="dog" id="dog-img" />
+            <span class="pet-emoji" id="dog-emoji" style="--px: 0px; --py: -29px;">🐶</span>
             <span class="pet-name" id="dog-name">Choco</span>
           </div>
         </div>
@@ -196,53 +196,68 @@
   </div>
 
   <div class="friends-slider-wrap">
+    <!-- Viewport: clips the track -->
     <div class="friends-slider" id="friends-slider">
+      <!-- Track: slides sit side-by-side here; JS translates this element -->
+      <div class="friends-track" id="friends-track">
 
-      <!--
-        ★★★ FRIENDS VIDEOS ★★★
-        
-        Each .friend-slide is one person.
-        Change the name="" attribute and the YouTube embed ID.
-        
-        Add more slides by duplicating a .friend-slide block.
-        Remove slides by deleting a .friend-slide block.
-        
-        YouTube ID: from URL https://youtu.be/XXXXXXXXX → use XXXXXXXXX
-      -->
+        <!--
+          ★★★ FRIENDS VIDEOS ★★★
 
-      <div class="friend-slide" data-name="Anak">
-        <div class="video-wrapper">
-          <iframe
-            src="https://youtube.com/shorts/-KcYiKFw3oI?si=S5EEIAg4fRFerfwi"
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen
-          ></iframe>
+          Each .friend-slide is one person.
+          Change the data-name="" attribute and the YouTube embed ID.
+
+          Add more slides by duplicating a .friend-slide block.
+          Remove slides by deleting a .friend-slide block.
+
+          YouTube ID: from URL https://youtu.be/XXXXXXXXX → use XXXXXXXXX
+        -->
+
+        <div class="friend-slide" data-name="Anak">
+          <div class="video-wrapper">
+            <iframe
+              src="https://youtube.com/embed/6Jbxjmx3vUQ?feature=share"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
-      </div>
 
-      <div class="friend-slide" data-name="Jamie">
-        <div class="video-wrapper">
-          <iframe
-            src="https://www.youtube.com/embed/FRIEND2_YOUTUBE_ID?rel=0"
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen
-          ></iframe>
+        <div class="friend-slide" data-name="Anak">
+          <div class="video-wrapper">
+            <iframe
+              src="https://youtube.com/embed/dTpZ9hw7G1w?feature=share"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
-      </div>
 
-      <div class="friend-slide" data-name="Sam">
-        <div class="video-wrapper">
-          <iframe
-            src="https://www.youtube.com/embed/FRIEND3_YOUTUBE_ID?rel=0"
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen
-          ></iframe>
+        <div class="friend-slide" data-name="Sam">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/FRIEND3_YOUTUBE_ID?rel=0"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
-      </div>
 
+        <div class="friend-slide" data-name="Sam">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/FRIEND3_YOUTUBE_ID?rel=0"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- Dot indicators -->
