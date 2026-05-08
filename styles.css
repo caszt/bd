@@ -6,6 +6,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 :root {
@@ -721,7 +724,7 @@ canvas#matrix {
   left: 50%;
   transform-origin: bottom left;
   --bx: -55%;
-  --by: -70px;
+  --by: -50px;
   transform: translateX(var(--bx)) translateY(calc(8px + var(--by))) scale(0.9);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
@@ -745,7 +748,7 @@ canvas#matrix {
   left: auto;
   right: 50%;
   --bx: 65%;
-  --by: -80px;
+  --by: -50px;
   transform: translateX(var(--bx)) translateY(calc(8px + var(--by))) scale(0.9);
 }
 
@@ -767,7 +770,7 @@ canvas#matrix {
   border-radius: 12px;
   filter: drop-shadow(0 4px 14px rgba(200,10,30,0.25));
   opacity: 0;
-  transform: translateX(var(--px, 0px)) translateY(calc(-30px + var(--py, 0px)));
+  transform: translateX(var(--px, 0px)) translateY(calc(20px + var(--py, 0px)));
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -1271,8 +1274,7 @@ canvas#matrix {
 
 .friends-slider-wrap {
   position: relative;
-  width: 100%;
-  max-width: 600px;
+  width: min(92vw, 560px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1280,19 +1282,32 @@ canvas#matrix {
   z-index: 1;
 }
 
+/* Viewport — clips overflowing slides */
 .friends-slider {
   width: 100%;
-  max-width: 560px;
-  display: flex;
   overflow: hidden;
   border-radius: 14px;
+  box-shadow: 0 0 0 1px rgba(212,168,67,0.22);
   touch-action: pan-y;
   cursor: grab;
-  box-shadow: 0 0 0 1px rgba(212,168,67,0.22);
 }
 
 .friends-slider:active { cursor: grabbing; }
-.friend-slide { flex: 0 0 100%; width: 100%; }
+
+/* Track — holds all slides side-by-side; JS translates this */
+.friends-track {
+  display: flex;
+  width: 100%;        /* overridden by JS after slide count is known */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Each slide is exactly one viewport wide */
+.friend-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;       /* prevents flex blowout */
+}
 
 .slider-dots {
   display: flex;
@@ -1315,4 +1330,82 @@ canvas#matrix {
   border-color: var(--scarlet1);
   transform: scale(1.35);
   box-shadow: 0 0 8px rgba(255,30,50,0.55);
+}
+/* ═══════════════════════════════════════════════
+   RESPONSIVE LAYOUT — DESKTOP vs MOBILE
+   ═══════════════════════════════════════════════ */
+
+/* ── DESKTOP (769px and up) ── */
+@media (min-width: 769px) {
+  #card-scene {
+    width: min(80vw, 520px);
+    height: min(75vh, 580px);
+  }
+  .pets-row { gap: clamp(2rem, 6vw, 4rem); }
+  #surprise-btn-wrap { bottom: 2.5rem; right: 2.5rem; }
+  .friends-slider-wrap { width: min(80vw, 640px); }
+  .friends-header { margin-bottom: 1.5rem; }
+  .friends-title { font-size: clamp(2rem, 4vw, 2.6rem); }
+  .left-arrow  { left: -2.2rem; }
+  .right-arrow { right: -2.2rem; }
+  .letter-paper { padding: 2.5rem 3rem; max-height: 72vh; }
+  .overlay-panel { max-width: 680px; }
+  .messages-content { max-width: 560px; padding: 2.5rem; }
+  .big-choice-btn { padding: 1.15rem 3rem; font-size: 1.2rem; min-width: 160px; }
+  #stage-yes { gap: 2.5rem; }
+  .video-wrapper { max-width: 620px; }
+}
+
+/* ── MOBILE (up to 768px) ── */
+@media (max-width: 768px) {
+  .overlay { padding: 1rem 0.5rem; }
+
+  .friends-slider-wrap { width: min(96vw, 440px); gap: 0.75rem; }
+  .friends-header { margin-bottom: 0.6rem; padding: 0 0.5rem; }
+  .friends-title { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+  .friend-name-label { font-size: clamp(1rem, 4.5vw, 1.3rem); }
+  .left-arrow  { left: -0.8rem; width: 36px; height: 36px; font-size: 0.85rem; }
+  .right-arrow { right: -0.8rem; width: 36px; height: 36px; font-size: 0.85rem; }
+
+  .letter-paper { padding: 1.25rem 1rem; max-height: 65vh; }
+  .letter-header { font-size: clamp(1.6rem, 7vw, 2.4rem); margin-bottom: 0.8rem; padding-bottom: 0.5rem; }
+  .letter-body { font-size: clamp(0.82rem, 3.5vw, 0.97rem); line-height: 1.75; }
+  .overlay-panel { max-width: 100%; padding: 0 0.5rem; }
+
+  #card-scene { width: min(94vw, 380px); height: min(68vh, 480px); }
+  .pets-row { gap: clamp(0.6rem, 4vw, 1.5rem); }
+  .pet-emoji { font-size: clamp(2.8rem, 10vw, 4rem); }
+  .pet-name { font-size: clamp(1.1rem, 4vw, 1.6rem); }
+  .chat-bubble { font-size: clamp(0.58rem, 2.5vw, 0.72rem); padding: 0.4rem 0.65rem; white-space: normal; max-width: 120px; }
+
+  /* Surprise button centred at bottom on mobile */
+  #surprise-btn-wrap {
+    bottom: 1.2rem;
+    right: 50%;
+    transform: translateX(50%);
+    align-items: center;
+  }
+  #surprise-btn-wrap.show { transform: translateX(50%); }
+  #surprise-btn { font-size: clamp(0.78rem, 3.5vw, 0.95rem); padding: 0.75rem 1.2rem; white-space: normal; text-align: center; max-width: 230px; }
+
+  /* Stage 3 buttons stacked */
+  .choice-buttons-row { flex-direction: column; gap: 0.8rem; width: 100%; max-width: 260px; }
+  .big-choice-btn { padding: 0.9rem 2rem; font-size: clamp(0.95rem, 4vw, 1.1rem); width: 100%; }
+
+  #chat-btn { width: 50px; height: 50px; font-size: 1.2rem; bottom: 1.2rem; right: 1rem; }
+  #home-btn { width: 38px; height: 38px; font-size: 1rem; }
+  .messages-content { max-width: 100%; padding: 1.25rem 1rem; max-height: 80vh; }
+  .video-wrapper { max-width: 100%; }
+}
+
+/* ── SMALL PHONES (up to 430px) ── */
+@media (max-width: 430px) {
+  .bday-line.l1, .bday-line.l2 { font-size: clamp(2.2rem, 11vw, 3rem); }
+  .bday-line.l3 { font-size: clamp(1.2rem, 6vw, 1.8rem); }
+  .bday-line.l4 { font-size: clamp(1.7rem, 9vw, 2.5rem); }
+  .paw-emoji { font-size: clamp(4rem, 16vw, 6rem); }
+  .paw-label { font-size: clamp(1.3rem, 5.5vw, 2rem); }
+  .friends-slider-wrap { width: 98vw; }
+  #stage-yes h1 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+  #stage-yes p  { font-size: clamp(0.9rem, 3.5vw, 1.1rem); }
 }
